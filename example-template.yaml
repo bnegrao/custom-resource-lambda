@@ -1,0 +1,38 @@
+# ESTE TEMPLATE MOSTRA COMO UTILIZAR O LAMBDA DescribeElbEnvironment.go QUE É UM CLOUDFORMATION RESOURCE PROVIDER.
+# MAS ESTE TEMPLATE NÃO PRECISA SER DEPLOYADO.
+# Ver o arquivo README.MD para mais informações
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'lambda to OUTPUT the ARN of an elastic beanstalk load balancer'
+
+Parameters:
+  AliasName:
+      Type: String
+      AllowedValues:
+      - dev
+      - hml
+      - prod
+
+Resources:
+    DescribeElbEnvironment:
+        Type: AWS::Serverless::Function
+        Properties:
+            Handler: DescribeElbEnvironment.goex
+            CodeUri: main
+            Runtime: go1.x
+            Description: ''
+            AutoPublishAlias: !Ref AliasName
+            Policies:
+            - AWSLambdaBasicExecutionRole # write logs in cloudwatch
+            - AWSElasticBeanstalkReadOnlyAccess # read-only access to information from elastic beanstalk
+
+    GetLbArn:
+        Type: Custom::DescribeElbEnvironment
+        Properties:
+            ServiceToken: !GetAtt DescribeElbEnvironment.Arn
+            ElasticBeanstalkEnvironmentName: "SOME-ELASTIC-BEANSTALK-ENVIRONMENT-NAME"
+      
+Outputs: 
+  ElasticBeanstalkLoadBalancerArn: 
+    Value: !GetAtt GetLbArn.LoadBalancerArn
