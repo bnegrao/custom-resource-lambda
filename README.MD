@@ -1,7 +1,5 @@
-This lambda is a "custom resource provider"
-https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html
-Implemented in golang
-https://github.com/aws/aws-lambda-go/blob/master/cfn/README.md
+This lambda is a [custom resource provider](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html)
+implemented in [golang](https://github.com/aws/aws-lambda-go/blob/master/cfn/README.md).
 
 AWS Cloudformation invokes the lambda during the creation of the stack and the lambda will return the ARN of a load balancer created in a Elastic Beanstalk environment.
 
