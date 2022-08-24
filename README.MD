@@ -5,4 +5,4 @@ AWS Cloudformation invokes the lambda during the creation of the stack and the l
 
 The example-template.yaml file shows how to setup this functionality.
 
-In that file there are 2 resources, one is the "AWS::Serverless::Function" to define the lambda, and the other is the "Custom::DescribeElbEnvironment", this is what invokes the lambda during cloudformation execution, returning the load balancer's ARN. The lambda is invoked by the '!GetAtt GetLbArn.LoadBalancerArn' construct in the template file.
+In that file there are 2 resources, one is the `AWS::Serverless::Function` to define the lambda, and the other is the `Custom::DescribeElbEnvironment`, this is what invokes the lambda during cloudformation execution, returning the load balancer's ARN. The lambda is invoked by the `!GetAtt GetLbArn.LoadBalancerArn` construct in the template file.
