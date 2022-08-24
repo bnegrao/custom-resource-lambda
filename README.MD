@@ -1,11 +1,10 @@
-Este lambda é um "custom resource provider"
+This lambda is a "custom resource provider"
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html
-Implementado em go
+Implemented in golang
 https://github.com/aws/aws-lambda-go/blob/master/cfn/README.md
 
-O lambda é invocado pelo AWS Cloudformation durante o momento da criação de uma stack e retorna o ARN de um load balancer criado em um ambiente Elastic Beanstalk.
+AWS Cloudformation invokes the lambda during the creation of the stack and the lambda will return the ARN of a load balancer created in a Elastic Beanstalk environment.
 
-O arquivo example-template.yaml mostra como utilizar esta funcionalidade.
+The example-template.yaml file shows how to setup this functionality.
 
-Neste arquivo estão declarados 2 recursos, um é o "AWS::Serverless::Function", que deploya o lambda na AWS, o outro é o "Custom::DescribeElbEnvironment", este é o que invoca a lambda durante o cloudformation e retorna o Arn do Loadbalancer
-quado é utilizada a funcão '!GetAtt GetLbArn.LoadBalancerArn'
+In that file there are 2 resources, one is the "AWS::Serverless::Function" to define the lambda, and the other is the "Custom::DescribeElbEnvironment", this is what invokes the lambda during cloudformation execution, returning the load balancer's ARN. The lambda is invoked by the '!GetAtt GetLbArn.LoadBalancerArn' construct in the template file.
